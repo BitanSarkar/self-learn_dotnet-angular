@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
-        "ASPNETCORE"
+        "ASPNETCORE",
+        "hmac",
+        "HMACSHA"
     ]
 }
