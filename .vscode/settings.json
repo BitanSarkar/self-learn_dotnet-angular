@@ -3,6 +3,7 @@
         "ASPNETCORE",
         "hmac",
         "HMACSHA",
+        "titlecase",
         "Toastr"
     ]
 }
