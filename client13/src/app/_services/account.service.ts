@@ -2,18 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ExtrasModule } from '../extras/extras.module';
-import { User } from '../_models/User';
+import { environment } from 'src/environments/environment';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
+  baseUrl:string = environment.baseUrl
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  constructor(private http:HttpClient, private extra:ExtrasModule) { }
+  constructor(private http:HttpClient) { }
   login(model:any){
-    return this.http.post(`${this.extra.baseUrl}/account/login`, model).pipe(
+    return this.http.post(`${this.baseUrl}account/login`, model).pipe(
       map((user: User) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
@@ -25,7 +26,7 @@ export class AccountService {
   }
 
   register(model:any){
-    return this.http.post(`${this.extra.baseUrl}/account/register`, model).pipe(
+    return this.http.post(`${this.baseUrl}account/register`, model).pipe(
       map((response: User) => {
         const user = response;
         if (user) {

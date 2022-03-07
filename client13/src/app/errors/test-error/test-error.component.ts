@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-import { ExtrasModule } from '../../extras/extras.module';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-test-error',
@@ -10,14 +9,16 @@ import { ExtrasModule } from '../../extras/extras.module';
 })
 export class TestErrorComponent implements OnInit {
 
+  
+  baseUrl = environment.baseUrl
   validationErrors: string[]  = [];
-  constructor(private http: HttpClient, private extraModule: ExtrasModule) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   get400Error() {
-    this.http.get(`${this.extraModule.baseUrl}/buggy/bad-request`).subscribe(response => {
+    this.http.get(`${this?.baseUrl}buggy/bad-request`).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);
@@ -25,7 +26,7 @@ export class TestErrorComponent implements OnInit {
   }
 
   get401Error() {
-    this.http.get(`${this.extraModule.baseUrl}/buggy/auth`).subscribe(response => {
+    this.http.get(`${this?.baseUrl}buggy/auth`).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);
@@ -33,7 +34,7 @@ export class TestErrorComponent implements OnInit {
   }
 
   get400Validation() {
-    this.http.post(`${this.extraModule.baseUrl}/account/register`,{}).subscribe(response => {
+    this.http.post(`${this?.baseUrl}account/register`,{}).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);
@@ -42,7 +43,7 @@ export class TestErrorComponent implements OnInit {
   }
 
   get500Error() {
-    this.http.get(`${this.extraModule.baseUrl}/buggy/server-error`).subscribe(response => {
+    this.http.get(`${this?.baseUrl}buggy/server-error`).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);
@@ -50,7 +51,7 @@ export class TestErrorComponent implements OnInit {
   }
 
   get404Error() {
-    this.http.get(`${this.extraModule.baseUrl}/buggy/not-found`).subscribe(response => {
+    this.http.get(`${this?.baseUrl}buggy/not-found`).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);

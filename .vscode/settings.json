@@ -3,6 +3,8 @@
         "ASPNETCORE",
         "hmac",
         "HMACSHA",
+        "kolkov",
+        "tabset",
         "titlecase",
         "Toastr"
     ]
